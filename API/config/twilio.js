@@ -4,6 +4,7 @@ const twilio = require('twilio')
 const accountSid = process.env.twilioSid
 const authToken = process.env.twilioToken
 
+const client = twilio(accountSid, authToken)
 
 const enviarMsn = async (data) => {
     try {

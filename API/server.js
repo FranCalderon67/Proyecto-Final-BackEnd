@@ -1,9 +1,10 @@
 //Imports de express
 const express = require("express");
 const app = express();
-// const { engine } = require("express-handlebars");
+const { engine } = require('express-handlebars')
 const session = require("express-session");
 const cors = require('cors')
+
 //Imports de Mongo
 const MongoStore = require("connect-mongo");
 const MongoUri = require("./config/mongoConfig.js");
@@ -11,7 +12,6 @@ const MongoUri = require("./config/mongoConfig.js");
 //Imports de Socket y Server
 const { Server: HttpServer } = require("http");
 const httpServer = new HttpServer(app);
-// const { Server: SocketServer } = require("socketio");
 const { Server: SocketServer } = require('socket.io')
 const socketServer = new SocketServer(httpServer);
 
@@ -34,18 +34,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
-app.set("views", "./public");
-// app.set("view engine", "hbs");
+app.set("views", "./public/hbsViews");
+app.set("view engine", "hbs");
 
-// app.engine(
-//     "hbs",
-//     engine({
-//         extname: ".hbs",
-//         defaultLayout: "index.hbs",
-//     })
-// );
+app.engine(
+    "hbs",
+    engine({
+        extname: ".hbs",
+        defaultLayout: "index.hbs",
+    })
+);
 
 //Guardo en MONGO los datos y cookie de sesion
+
 app.use(
     session({
         store: MongoStore.create({ mongoUrl: MongoUri }),

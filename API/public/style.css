@@ -1,0 +1,132 @@
+.product-flex--container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    margin: 1rem 0 1rem 0;
+  }
+  .card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-flex-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-flex-container input {
+    width: 300px;
+    caret-color: red;
+    margin: 0.5rem 0 1rem 1rem;
+  }
+  .form-flex-container label {
+    margin-left: 1rem;
+  }
+  .form-flex-container button {
+    width: 250px;
+    margin-left: 1rem;
+    background-color: yellowgreen;
+    font-size: 18px;
+  }
+  .chat-container {
+    margin-left: 1rem;
+  }
+  #messages {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+  }
+  .autor {
+    color: blue;
+    font-weight: bold;
+  }
+  .hora {
+    color: brown;
+  }
+  .mensaje {
+    color: green;
+    font-style: italic;
+  }
+  
+  .avatar {
+    height: 50px;
+    width: 75px;
+  }
+  
+  .login-background {
+    background-color: rgb(235, 235, 235);
+  }
+  
+  .login-form-background {
+    margin-top: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+  }
+  
+  .login-form-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    margin-left: 30%;
+  }
+  
+  .login-form-flex-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+  
+ .inputUsuario {
+    margin-bottom: 1rem;
+    width: 200px;
+    height: 40px;
+    border: unset;
+    outline: none;
+    border-bottom: solid 2px rgb(156, 5, 149);
+  }
+  
+  .btn-login,
+  .btn-regresar {
+    background-color: rgb(156, 5, 149);
+    color: white;
+    width: 100px;
+    height: 40px;
+    border: unset;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .login-form-registrado {
+    margin-top: 2rem;
+    font-size: 15px;
+    color: rgb(156, 156, 156);
+  }
+  
+  .navbar{
+    background-color: #ffdb15;
+  }
+  
+  .container-fluid{
+    margin-left: 2rem;
+  }
+  
+  .logo{
+    height: 45px;
+    width: 45px;
+  }
+  
+  .nav-link{
+    color: black;
+    text-decoration: none;
+  }
+  
+  
+  #bienvenido{
+      font-size: 20px;
+      margin-right: 5rem;
+      height: 50px;
+      width: 100px;
+      color: black;
+   }

@@ -1,11 +1,15 @@
 const passport = require("passport")
 const LocalStrategy = require('passport-local')
 const bcrypt = require('bcryptjs')
+
 const usuarios = require('../Daos/daoUsuario.js')
 const { notifyNewUser } = require('../config/nodemailer.js')
 const { enviarMsn } = require('../config/twilio.js')
 
 usuarios.conectarMongo()
+
+
+
 
 passport.use(
     "signup",
@@ -26,7 +30,6 @@ passport.use(
                         nombre: req.body.nombre,
                         apellido: req.body.apellido,
                         edad: req.body.edad,
-                        imgPerfil: `http://${req.headers.host}/public/uploads/${req.file.filename}`,
                         direccion: req.body.direccion,
                         numeracion: req.body.numeracion,
                         ciudad: req.body.ciudad,
@@ -62,6 +65,7 @@ passport.use(
         async (email, password, callback) => {
             try {
                 const user = await usuarios.obtenerUsuario(email);
+
 
                 if (!user || !bcrypt.compareSync(password, user.password)) {
                     return callback(null, false);

@@ -1,0 +1,54 @@
+<html lang="es">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stickers Signup</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../style.css" />
+
+  </head>
+
+  <body class="login-background">
+    <div class="container mt-3">
+      <div>
+        <br />
+        <div class="login-form-background login-form-flex">
+          <h1>REGISTRATE</h1>
+          <form class="login-form-flex-inputs" action="/signup" method="post" autocomplete="off">
+           <h3>Datos Personales</h3>
+           <input class="inputUsuario" id="nombreRegistro" type="text" name="nombre" placeholder="Nombre" required />
+           <input class="inputUsuario" id="apellidoRegistro" type="text" name="apellido" placeholder="Apellido" required />
+           <input class="inputUsuario" id="edadRegistro" type="number" name="edad" placeholder="Edad" required />
+           <h3>Domicilio</h3>
+           <input class="inputUsuario" id="calleRegistro" type="text" name="direccion" placeholder="Direccion" required />
+           <input class="inputUsuario" id="numeroRegistro" type="number" name="numeracion" placeholder="Numeracion" />
+           <input class="inputUsuario" id="localidadRegistro" type="text" name="ciudad" placeholder="Ciudad" required />
+           <input class="inputUsuario" id="provinciaRegistro" type="text" name="provincia" placeholder="Provincia" required />
+           <label htmlFor="pais">Pais</label>
+           <select class="inputUsuario" id="paisRegistro" name="pais">
+           <option id="paises"></option>
+           </select>
+           <h3>Telefono</h3>
+           <input class="inputUsuario" id="prefijoRegistro" type='tel' name='prefijo' placeholder="Prefijo" required />
+           <input class="inputUsuario" id="telefonoRegistro" type="tel" name="telefono" placeholder="Telefono" required />
+           <h3>Usuario</h3>
+           <input class="inputUsuario" id="nombreRegistro" type="email" name="email" placeholder="Email" required />
+           <input class="inputUsuario" id="passwordRegistro" type="password" name="password" placeholder="Password" required />
+         
+
+            <button class="btn-login">ENVIAR</button>
+
+          </form>
+          <a href="/"> <button class="btn-regresar">REGRESAR</button></a>
+        </div>
+      </div>
+    </div>
+    <script src="../main.js"></script>
+  </body>
+</html>

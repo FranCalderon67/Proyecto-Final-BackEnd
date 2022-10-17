@@ -1,5 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb')
-const { logs } = require('../config/logs.js')
+const logs = require('../config/logs.js')
 
 class ContenedorMongoDB {
     constructor(connection, db, collection) {
@@ -13,6 +13,7 @@ class ContenedorMongoDB {
             console.log("Conectado a Mongo Atlas");
         } catch (error) {
             logs.logger.error(`Error DB :${error}`)
+
             throw error;
         }
     }
@@ -28,7 +29,6 @@ class ContenedorMongoDB {
     async obtenerPorId(id) {
         try {
             const data = await this.mongo.db(this.db).collection(this.collection).findOne({ _id: ObjectId(id) });
-
             return data;
         } catch (error) {
             logs.logger.error(`Error DB :${error}`)

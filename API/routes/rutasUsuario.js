@@ -2,21 +2,33 @@ const { Router } = require("express");
 const path = require("path");
 const passport = require("../config/passport.js");
 const routerUsuario = Router();
-const upload = require('../config/multer.js')
+const usuarioDao = require('../Daos/daoUsuario.js')
 
 routerUsuario.use(passport.initialize());
 // routerUsuario.use(passport.session());
 
-routerUsuario.post("/login", passport.authenticate("login", { failureRedirect: "/errorlogin", successRedirect: "http://localhost:3000/" }));
+routerUsuario.get("/login", (req, res) => {
+    res.render(path.join(process.cwd(), "./public/hbsViews/login.hbs"));
+});
 
-routerUsuario.post("/signup", upload.single('avatar'), passport.authenticate("signup", { failureRedirect: "/failedSignup", successRedirect: "http://localhost:3000/login" }));
+routerUsuario.get("/signup", (req, res) => {
+    res.render(path.join(process.cwd(), "./public/hbsViews/signup.hbs"));
+});
 
-routerUsuario.get("/errorlogin", (req, res) => {
-    res.redirect('http://localhost:3000/errorlogin')
+
+routerUsuario.post("/login", passport.authenticate("login", { failureRedirect: "/failedLogin", successRedirect: "/home" }));
+
+routerUsuario.post("/signup", passport.authenticate("signup", { failureRedirect: "/failedSignup", successRedirect: "/login" }));
+
+
+
+
+routerUsuario.get("/failedLogin", (req, res) => {
+    res.render(path.join(process.cwd(), "./public/hbsViews/errorLogin.hbs"));
 });
 
 routerUsuario.get("/failedSignup", (req, res) => {
-    res.redirect('http://localhost:3000/errorlogin')
+    res.render(path.join(process.cwd(), "./public/hbsViews/errorSignup.hbs"));
 });
 
 routerUsuario.get("/logout", (req, res) => {
@@ -43,6 +55,13 @@ routerUsuario.get("/user", (req, res) => {
 
 });
 
+routerUsuario.get('/test', (req, res) => {
+
+    res.send(req.session.passport.user.username.email)
+})
+
+
+
 routerUsuario.get("/userdata", (req, res) => {
 
     if (req.session?.passport) {
@@ -52,18 +71,6 @@ routerUsuario.get("/userdata", (req, res) => {
     }
 });
 
-routerUsuario.get("/foto", (req, res) => {
 
-    if (req.session?.passport) {
-        res.render(req.session.passport.user.username.imgPerfil)
-    } else {
-        res.send("No Foto")
-    }
-});
-
-routerUsuario.get('/perfil', (req, res) => {
-    const usuario = req.session.passport.user.username
-    res.render('perfil', { usuario })
-})
 
 module.exports = routerUsuario;

@@ -1,0 +1,118 @@
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    {{! Bootstrap CDN }}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/socket.io/socket.io.js"></script>
+
+    <link rel="stylesheet" href="../style.css" />
+    <title>Stickers</title>
+
+  </head>
+
+  <body>
+    
+    
+
+ <nav class="navbar navbar-expand-lg">
+   <div class="container-fluid">
+    <a class="navbar-brand" href="/home"><img class="logo" src="https://images-na.ssl-images-amazon.com/images/I/8168SYLpnrL.png" alt="LOGO" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+        </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" >
+             <li class="nav-item dropdown">
+                <p class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"  >
+                    Productos
+                  </p>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/productos/cat/Personajes">Personajes</a></li>
+                        <li><a class="dropdown-item" href="/productos/cat/Naves">Naves</a></li>
+                        <li><a class="dropdown-item" href="/productos/cat/Logos">Logos</a></li>
+                        <li><a class="dropdown-item" href="/productos/cat/Droides">Droides</a></li>
+                      </ul>
+              </li>
+                       <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/login">Iniciar Sesion</a >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signup" target="_blank">Registrarse</a >
+                            </li>
+                            <form class="nav-item" action="/pago" method="post">
+                                <button class="nav-link">Pagar</button >
+                            </form>
+
+                            <form class="nav-item" action="/carrito" method="delete">
+                                <button class="nav-link">Vaciar Carrito</button >
+                            </form>
+                      </ul>
+                    </div>
+                    <button><a id="btnCerrarSesion" href="/logout">LogOut</a></button>
+                </div>
+                <h1 id="bienvenido"></h1>
+            </nav>
+
+
+    <section>
+      <h1>Agregar productos</h1>
+      <div>
+        <form class="form-flex-container" action="/productos" method="POST">
+          <label for="name">Nombre</label>
+          <input id="nombreProducto" type="text" name="name" />
+          <label for="image">Imagen</label>
+          <input id="imagenProducto" type="text" name="image" />
+          <label for="price">Precio</label>
+          <input id="precioProducto" type="number" name="price" />
+           <label for="categoria">Categoria</label>
+          <input id="categoriaProducto" type="text" name="category" />
+            <label for="description">Descripcion</label>
+          <input id="descripcionProducto" type="text" name="description" />
+          
+          <button type="submit" onclick="return enviarProducto()"> Cargar Producto</button>
+        </form>
+      </div>
+    </section>
+  
+
+    <section>
+
+    </section>
+    <section>
+      <h1>Todos los productos</h1>
+      <div id="productos" class="product-flex--container"></div>
+
+    </section>
+
+    <section>
+      <h1>Centro de Mensajes</h1>
+      <input type="email" id="username" placeholder="Ingresá tu email" />
+      <input type="text" id="firstname" placeholder="Ingresá tu nombre" />
+      <input type="text" id="lastname" placeholder="Ingresá tu apellido" />
+      <input type="text" id="age" placeholder="Ingresá tu edad" />
+      <input type="text" id="alias" placeholder="Ingresá tu alias" />
+      <input type="text" id="avatar" placeholder="Ingresá tu avatar (url)" />
+
+      <div id="messages"></div>
+      <form id="formularioMensaje" class="chat-container">
+        <input placeholder="Mensaje" type="text" id="text" required />
+        <input id="btnEnviar" type="submit" />
+      </form>
+
+    </section>
+
+    <script src="../main.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  </body>
+
+</html>

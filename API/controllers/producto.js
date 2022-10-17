@@ -1,5 +1,5 @@
 const producto = require('../Daos/daoProducto.js')
-
+const path = require('path')
 const controllersProducto = {}
 
 controllersProducto.obtenerTodos = async (req, res) => {
@@ -15,7 +15,9 @@ controllersProducto.obtenerPorId = async (req, res) => {
     const id = req.params.id
     try {
         const buscado = await producto.obtenerPorId(id)
+
         return res.json(buscado)
+
     } catch (error) {
         console.log("ERROR=>", error)
     }
@@ -39,8 +41,8 @@ controllersProducto.agregarItem = async (req, res, next) => {
         } else {
             await producto.agregarItem(prod);
             next()
-            res.redirect("http://localhost:3000/");
-            // res.json(producto.obtenerTodos())
+            res.json(producto.obtenerTodos())
+
         }
     } catch (error) {
         console.log('ERROR=>', error)
@@ -52,7 +54,6 @@ controllersProducto.actualizarItem = async (req, res) => {
     const id = req.params.id
     const data = req.body
     try {
-        console.log(data)
         await producto.actualizarItem(id, data)
     } catch (error) {
         console.log('ERROR=>', error)
@@ -65,7 +66,7 @@ controllersProducto.eliminarItem = async (req, res, next) => {
     try {
         await producto.eliminarItem(id)
         next()
-        res.redirect("http://localhost:3000");
+        res.send('Producto Eliminado')
     } catch (error) {
         console.log("ERROR=>", error)
     }
