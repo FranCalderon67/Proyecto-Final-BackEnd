@@ -51,7 +51,7 @@ routerCarrito.delete('/carrito/:_id', async (req, res) => {
     const id = req.params._id
     const activeUser = await usuarioDao.obtenerUsuario(req.session?.passport.user.username.email)
 
-    const producto = await productoDao.obtenerPorId(id)
+    const producto = await productoDao.eliminarItem(id)
 
     const nuevoCarrito = [...activeUser.carrito, producto]
 
@@ -63,7 +63,7 @@ routerCarrito.delete('/carrito/:_id', async (req, res) => {
 routerCarrito.delete('/carrito', async (req, res) => {
 
     const activeUser = await usuarioDao.obtenerUsuario(req.session?.passport.user.username.email)
-    const nuevoCarrito = [...activeUser.carrito, []]
+    const nuevoCarrito = []
     await usuarioDao.actualizarItem(activeUser._id, { "carrito": nuevoCarrito })
     res.redirect('/home')
 

@@ -75,6 +75,16 @@ const enviarProducto = () => {
     return false;
 };
 
+const eliminarDeCarrito = (_id) => {
+
+    fetch(`http://localhost:8080/carrito/:${_id}`, {
+        method: 'DELETE',
+        body: FormData
+    }).then((res) => res.json())
+        .catch((err) => { console.log(err) })
+
+}
+
 const crearEtiquetasProductos = (producto) => {
     const { name, image, price, _id } = producto;
     return `
@@ -88,10 +98,8 @@ const crearEtiquetasProductos = (producto) => {
       <form action="/carrito/${_id}" method="POST">
       <button>Agregar al carrito</button>
       </form>
-      <form action="/carrito" method="delete">
-      <button>Eliminar de Carrito</button>
-      </form>
-    </div>
+       <button onclick= "return eliminarDeCarrito(${_id})" id="eliminarDelCarrito">Eliminar de Carrito</button>
+      </div>
   </div>
 </div>`;
 };
@@ -128,12 +136,24 @@ btnCerrar.addEventListener("click", async () => {
     }, 2000);
 });
 
-const password = document.getElementById("passwordRegistro").value
-const passwordControl = document.getElementById("passwordRegistroDuplicado").value
+const vaciarCarrito = document.getElementById('btnVaciarCarrito')
+
+vaciarCarrito.addEventListener('click', (e) => {
+    e.preventDefault()
+    fetch('http://localhost:8080/carrito', {
+        method: 'DELETE',
+        body: FormData
+    }).then((res) => res.json())
+})
 
 
 
+// const btnEliminarDelCarrito = document.getElementById('eliminarDelCarrito')
 
-// fetch('/prefijos')
-// .then((res)=>res.json())
-// .then((tel)=>)
+// btnEliminarDelCarrito.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     fetch('http://localhost:8080/carrito/:_id', {
+//         method: 'DELETE',
+//         body: FormData
+//     }).then((res) => res.json())
+// })

@@ -39,6 +39,7 @@
                         <li><a class="dropdown-item" href="/productos/cat/Naves">Naves</a></li>
                         <li><a class="dropdown-item" href="/productos/cat/Logos">Logos</a></li>
                         <li><a class="dropdown-item" href="/productos/cat/Droides">Droides</a></li>
+                        
                       </ul>
               </li>
                        <li class="nav-item">
@@ -47,13 +48,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/signup" target="_blank">Registrarse</a >
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/carrito">Carrito</a >
+                            </li>
                             <form class="nav-item" action="/pago" method="post">
                                 <button class="nav-link">Pagar</button >
                             </form>
-
-                            <form class="nav-item" action="/carrito" method="delete">
-                                <button class="nav-link">Vaciar Carrito</button >
-                            </form>
+                            <li class="nav-item">
+                            <button id="btnVaciarCarrito" class="nav-link">Vaciar Carrito</button >
+                            </li>
                       </ul>
                     </div>
                     <button><a id="btnCerrarSesion" href="/logout">LogOut</a></button>
