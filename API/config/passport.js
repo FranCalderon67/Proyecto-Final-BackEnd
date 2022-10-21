@@ -39,7 +39,8 @@ passport.use(
                         telefono: req.body.telefono,
                         email: email,
                         password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
-                        carrito: []
+                        carrito: [],
+                        mensajes: []
                     }
                     console.log("nuevo usuario=>", newUser)
                     notifyNewUser(newUser)

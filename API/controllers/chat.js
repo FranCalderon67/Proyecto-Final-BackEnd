@@ -1,5 +1,5 @@
-const chat = require('../Daos/daoChat.js')
-
+const chat = require('../Daos/daoChat.js');
+const usuarioDao = require("../Daos/daoUsuario.js")
 const controllerChat = {}
 
 controllerChat.obtenerTodos = async (req, res) => {
@@ -29,13 +29,26 @@ controllerChat.agregarMsj = async (req, res) => {
             res.send(alert('Algunos campos estan vacios'))
         } else {
             await chat.agregarItem(mensaje);
-            res.redirect("http://localhost:3000/");
+            const activeUser = await usuarioDao.obtenerUsuario(req.session?.passport.user.username.email)
+            const nuevoChat = [...activeUser.mensajes, mensaje]
+            await usuarioDao.actualizarItem(activeUser._id, { "mensajes": nuevoChat })
         }
-
-
     } catch (error) {
         console.log('ERROR=>', error)
     }
+}
+
+controllerChat.getMensajesUsuario = async (req, res) => {
+    const email = req.params.email
+    try {
+        const activeUser = await usuarioDao.obtenerUsuario(email)
+        res.send(activeUser.mensajes)
+    } catch (error) {
+        console.log("ERROR=>", error)
+    }
+
+
+
 }
 
 

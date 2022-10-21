@@ -29,7 +29,7 @@ class ContenedorMongoDB {
     async obtenerPorId(id) {
         try {
             const data = await this.mongo.db(this.db).collection(this.collection).findOne({ _id: ObjectId(id) });
-            return data;
+            return data
         } catch (error) {
             logs.logger.error(`Error DB :${error}`)
             throw error;

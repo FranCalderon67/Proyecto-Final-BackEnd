@@ -2,14 +2,17 @@ const { Router } = require('express')
 const controllerChat = require('../controllers/chat.js')
 const routerChat = Router()
 
-routerChat.get('/mensajes', (req, res) => {
+routerChat.get('/chat', (req, res) => {
     controllerChat.obtenerTodos(req, res)
 })
 
-routerChat.post("/mensajes", (req, res) => {
+routerChat.post("/chat", (req, res) => {
     controllerChat.agregarMsj(req, res)
 });
 
+routerChat.get('/chat/:email', (req, res) => {
+    controllerChat.getMensajesUsuario(req, res)
+})
 
 
 module.exports = routerChat;

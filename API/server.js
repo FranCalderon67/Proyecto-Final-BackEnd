@@ -26,9 +26,7 @@ const routerProducto = require('./routes/rutasProducto.js')
 const routerChat = require('./routes/rutasChat.js')
 const routerHomeWeb = require("./utils/home.js");
 const routerPrefijo = require('./utils/prefijos.js')
-// const yargs = require("yargs");
-// const argumentos = process.argv.slice[2];
-const { logger } = require('./config/logs.js')
+
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -47,6 +45,8 @@ app.engine(
 
 //Guardo en MONGO los datos y cookie de sesion
 
+const sessionAge = process.env.SESSIONEXP || 60000
+
 app.use(
     session({
         store: MongoStore.create({ mongoUrl: MongoUri }),
@@ -55,7 +55,7 @@ app.use(
         saveUninitialized: false,
         rolling: true,
         cookie: {
-            maxAge: 60000,
+            maxAge: sessionAge,
         },
     })
 );
@@ -78,52 +78,9 @@ socketServer.on("connection", async (socket) => {
 
 });
 
+const port = process.env.PORT || 8080
 
+httpServer.listen(port, () => {
+    console.log(`Servidor escuchando en puerto ${port}`)
+})
 
-// imports de Cluster
-const cluster = require("cluster");
-const numCPUs = require("os").cpus().length;
-
-const parseArgs = require("minimist");
-
-const args = parseArgs(process.argv.slice(2), { alias: { p: "port", m: "modo" }, default: { port: 8080, modo: "FORK" } });
-const PORT = args.port;
-if (args.modo === "CLUSTER") {
-    if (cluster.isPrimary) {
-        for (let i = 0; i < numCPUs; i++) {
-            console.log(`Escuchando en el puerto ${PORT}`);
-            cluster.fork();
-        }
-    }
-    else {
-        httpServer.listen(PORT, () => { });
-        httpServer.on("error", (error) => console.error(error, logger.error('Ups! Algo salio mal')));
-        process.exit()
-    }
-}
-if (args.modo === "FORK") {
-    httpServer.listen(PORT, () => {
-        console.log(`Escuchando en el puerto ${httpServer.address().port}`);
-
-    });
-    httpServer.on("error", (error) => console.error(error, "error de conexión"));
-}
-
-
-
-// httpServer.listen(
-//   yargs(argumentos)
-//     .default({
-//       port: 8080,
-//     })
-//     .alias({
-//       p: "port",
-//     }).argv,
-//   () => {
-//     console.log(`Servidor escuchando en puerto ${PORT}`);
-//   }
-// );
-
-// httpServer.listen(PORT, () => {
-//   console.log(`Servidor escuchando en puerto ${PORT}`)
-// })

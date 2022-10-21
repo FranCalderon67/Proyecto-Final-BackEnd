@@ -11,7 +11,7 @@ const transporter = createTransport({
     },
 });
 
-const adminEmail = "franciscocalderon1990@gmail.com";
+const adminEmail = process.env.ADMINMAIL
 
 const notifyNewUser = async (data) => {
     try {
@@ -36,6 +36,7 @@ const notifyNewUser = async (data) => {
     }
 };
 
+
 const notifyOrder = async (data) => {
     try {
         const status = await transporter.sendMail({
@@ -50,7 +51,8 @@ const notifyOrder = async (data) => {
             <li>Direccion: ${data.direccion}, ${data.numeracion}, ${data.ciudad}, ${data.provincia}, ${data.pais}</li>
             <li>Edad: ${data.edad}</li>
             <li>Telefono:${data.prefijo} ${data.telefono}</li>
-            <li>Carrito: ${data.carrito}</li>
+            <li>Carrito: ${data.carrito.map((p) => `<ul><li>Producto:${p.name} - $:${p.price}</li></ul>`)}
+            </li>
             </ul>
             `,
         });

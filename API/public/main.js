@@ -75,9 +75,9 @@ const enviarProducto = () => {
     return false;
 };
 
-const eliminarDeCarrito = (_id) => {
-
-    fetch(`http://localhost:8080/carrito/:${_id}`, {
+const eliminarDeCarrito = async (_id) => {
+    console.log(_id)
+    await fetch(`http://localhost:8080/carrito/${_id}`, {
         method: 'DELETE',
         body: FormData
     }).then((res) => res.json())
@@ -87,6 +87,9 @@ const eliminarDeCarrito = (_id) => {
 
 const crearEtiquetasProductos = (producto) => {
     const { name, image, price, _id } = producto;
+    console.log(typeof _id)
+    console.log(typeof _id.toString())
+    console.log(typeof JSON.stringify(_id))
     return `
   <div>
   <div class="card" style="width: 18rem;">
@@ -98,7 +101,7 @@ const crearEtiquetasProductos = (producto) => {
       <form action="/carrito/${_id}" method="POST">
       <button>Agregar al carrito</button>
       </form>
-       <button onclick= "return eliminarDeCarrito(${_id})" id="eliminarDelCarrito">Eliminar de Carrito</button>
+            <button onclick = eliminarDeCarrito(${JSON.stringify(_id)})>Eliminar de Carrito</button>
       </div>
   </div>
 </div>`;
@@ -146,14 +149,3 @@ vaciarCarrito.addEventListener('click', (e) => {
     }).then((res) => res.json())
 })
 
-
-
-// const btnEliminarDelCarrito = document.getElementById('eliminarDelCarrito')
-
-// btnEliminarDelCarrito.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     fetch('http://localhost:8080/carrito/:_id', {
-//         method: 'DELETE',
-//         body: FormData
-//     }).then((res) => res.json())
-// })

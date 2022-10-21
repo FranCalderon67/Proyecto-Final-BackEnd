@@ -3,7 +3,7 @@ const twilio = require('twilio')
 
 const accountSid = process.env.twilioSid
 const authToken = process.env.twilioToken
-
+const adminPhone = process.env.ADMINPHONE
 const client = twilio(accountSid, authToken)
 
 const enviarMsn = async (data) => {
@@ -18,7 +18,7 @@ const enviarMsn = async (data) => {
             Telefono:${data.prefijo} ${data.telefono}
             `,
             from: 'whatsapp:+14155238886',
-            to: `whatsapp:${process.env.adminPhone}`
+            to: `whatsapp:${adminPhone}`
         })
         return message
     } catch (error) {
@@ -40,7 +40,7 @@ const enviarMsnCompra = async (data) => {
             carrito: ${data.carrito}
             `,
             from: 'whatsapp:+14155238886',
-            to: `whatsapp:${process.env.adminPhone}`
+            to: `whatsapp:${adminPhone}`
         })
         return message
     } catch (error) {
