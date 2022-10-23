@@ -51,7 +51,7 @@ const notifyOrder = async (data) => {
             <li>Direccion: ${data.direccion}, ${data.numeracion}, ${data.ciudad}, ${data.provincia}, ${data.pais}</li>
             <li>Edad: ${data.edad}</li>
             <li>Telefono:${data.prefijo} ${data.telefono}</li>
-            <li>Carrito: ${data.carrito.map((p) => `<ul><li><li>${p.image}</li>Producto:${p.name} - $:${p.price}</li></ul>`)}
+            <li>Carrito: ${data.carrito.map((p) => `<ul><li><li><img src="${p.image}"/></li>Producto:${p.name} - $:${p.price}</li></ul>`)}
             </li>
             </ul>
             `,
